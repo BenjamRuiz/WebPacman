@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Mapa</title>
+<title>Pacman</title>
 
 
 <script type="module" src="juego.js">
@@ -9,9 +9,14 @@
 </script>
 <script src="../libs/keyframe.js/keyframe.js"></script>
 <style>
+	body{
+		background-color: black;
+	}
 	#score{
 		display: inline;
-		position: absolute;
+		position: fixed;
+		top: 10px;
+		left: 10px;
 		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 		font-size: xx-large;
 		color: white;
@@ -19,23 +24,25 @@
 	#webglcanvas{
 		display: inline;
 		position: absolute;
+		top: 0;
+		left: 0;
 	}
 	#gameover{
-		display: hidden;
+		visibility: visible;
 	}
 </style>
 </head>
 
 <body>
-<div id="container">
-    <canvas id="webglcanvas" width=1250 height=600></canvas>
-	<div id ="score">
+<img src="../images/Gameover2.png" id="gameover">
+	<div id="container">
+    	<canvas id="webglcanvas" width=1250 height=600></canvas>
+		<div id ="score">
 		Score: 
-		<div id="title">
-			PacMan Map
+			<div id="title">
+					PacMan
+			</div>
 		</div>
 	</div>
-</div>
-<!-- <img src="../images/Gameover2.png" id="gameover"> -->
 </body>
 </html>
