@@ -1,7 +1,6 @@
 import * as THREE from '../libs/three.module.js'
 import { GLTFLoader } from '../libs/loaders/GLTFLoader.js';
 import { FirstPersonControls } from '../libs/controls/FirstPersonControls.js';
-import { OrbitControls } from '../libs/controls/OrbitControls.js';
 import { OBJLoader } from '../libs/loaders/OBJLoader.js';
 import { MTLLoader } from '../libs/loaders/MTLLoader.js';
 
@@ -39,8 +38,8 @@ class GhostObject{
         this.forward = true;
         this.moveSpeed = 0.01;
 
-        this.ghostObject = THREE.Object3D();
-        this.box = new THREE.Box3().setFromObject(ghostObject);
+        this.ghostObject = new THREE.Object3D();
+        this.box = new THREE.Box3().setFromObject(this.ghostObject);
 
         const gltfLoadGhost = new GLTFLoader();
         gltfLoadGhost.load(modelAddress, (gltf, el) =>{
@@ -51,21 +50,21 @@ class GhostObject{
         });
 
         this.movement = function () {
-            if(forward == false){
+            if(this.forward == false){
                 this.moveSpeed *= -1;
             }
             if(this.direction == 0){
-                this.ghostObject.translateZ(moveSpeed);
+                this.ghostObject.translateZ(this.moveSpeed);
             }else if(this.direction == 1){
-                this.ghostObject.translateX(moveSpeed);
+                this.ghostObject.translateX(this.moveSpeed);
             }else if(this.direction == 2){
-                this.ghostObject.translateZ(-moveSpeed);
+                this.ghostObject.translateZ(-this.moveSpeed);
             }else if(this.direction == 3){
-                this.ghostObject.translateX(-moveSpeed);
+                this.ghostObject.translateX(-this.moveSpeed);
             }else{
                 console.error("Error in ghost movement ");
             }
-            if(forward == false){
+            if(this.forward == false){
                 this.moveSpeed *= -1; 
             }
         };
@@ -277,7 +276,7 @@ function createScene(canvas){
     ghostArray.push(ghost)
 
     ghostArray.forEach((ghost)=>{
-        scene.add(scene.add(ghost))
+        scene.add(ghost.ghostObject)
     });
 
     // Ambient Light ilumina todos los elementos de la escena de manera pareja
